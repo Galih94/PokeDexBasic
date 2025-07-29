@@ -56,15 +56,11 @@
 		};
 		2AFF9D4D2E38839000A0870E /* PokeDexBasicTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PokeDexBasicTests;
 			sourceTree = "<group>";
 		};
 		2AFF9D572E38839000A0870E /* PokeDexBasicUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PokeDexBasicUITests;
 			sourceTree = "<group>";
 		};
@@ -115,7 +111,6 @@
 				2AFF9D4D2E38839000A0870E /* PokeDexBasicTests */,
 				2AFF9D572E38839000A0870E /* PokeDexBasicUITests */,
 				2AFF9D352E38838E00A0870E /* Products */,
-				34619C68E00E1FD98CBAD8D7 /* Pods */,
 				2A20C194DF5B64EA29833212 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -128,13 +123,6 @@
 				2AFF9D542E38839000A0870E /* PokeDexBasicUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		34619C68E00E1FD98CBAD8D7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
