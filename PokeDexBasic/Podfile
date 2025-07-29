@@ -9,6 +9,7 @@ target 'PokeDexBasic' do
   target 'PokeDexBasicTests' do
     inherit! :search_paths
     pod 'Alamofire'
+    pod 'RealmSwift'
   end
 
   target 'PokeDexBasicUITests' do

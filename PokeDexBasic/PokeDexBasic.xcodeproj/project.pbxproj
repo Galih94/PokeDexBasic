@@ -65,15 +65,11 @@
 		};
 		2AFF9D4D2E38839000A0870E /* PokeDexBasicTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PokeDexBasicTests;
 			sourceTree = "<group>";
 		};
 		2AFF9D572E38839000A0870E /* PokeDexBasicUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PokeDexBasicUITests;
 			sourceTree = "<group>";
 		};
@@ -149,7 +145,6 @@
 				0F9A4123EC5A452EA6D2E63E /* Pods-PokeDexBasicTests.debug.xcconfig */,
 				FCF1D1005245C2438A2985BF /* Pods-PokeDexBasicTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -321,9 +316,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PokeDexBasicTests/Pods-PokeDexBasicTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PokeDexBasicTests/Pods-PokeDexBasicTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
