@@ -31,6 +31,11 @@
 
 /* Begin PBXFileReference section */
 		0F9A4123EC5A452EA6D2E63E /* Pods-PokeDexBasicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeDexBasicTests.debug.xcconfig"; path = "Target Support Files/Pods-PokeDexBasicTests/Pods-PokeDexBasicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2A4994842E38B21E0014DDC8 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A4994862E38B2420014DDC8 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A642FA02E38B2AC00F2B7AF /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A642FA22E38B2B300F2B7AF /* realm-monorepo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "realm-monorepo.xcframework"; path = "Pods/Realm/core/realm-monorepo.xcframework"; sourceTree = "<group>"; };
+		2A642FA42E38B2BB00F2B7AF /* Pods_PokeDexBasic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_PokeDexBasic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFF9D342E38838E00A0870E /* PokeDexBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeDexBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFF9D4A2E38839000A0870E /* PokeDexBasicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokeDexBasicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFF9D542E38839000A0870E /* PokeDexBasicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokeDexBasicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +111,11 @@
 		2A20C194DF5B64EA29833212 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A642FA42E38B2BB00F2B7AF /* Pods_PokeDexBasic.framework */,
+				2A642FA22E38B2B300F2B7AF /* realm-monorepo.xcframework */,
+				2A642FA02E38B2AC00F2B7AF /* RealmSwift.framework */,
+				2A4994862E38B2420014DDC8 /* Realm.framework */,
+				2A4994842E38B21E0014DDC8 /* Alamofire.framework */,
 				5143A39F73F6E710CDAB322B /* Pods_PokeDexBasic.framework */,
 				6DABD6324F33547C62A6D8EC /* Pods_PokeDexBasic_PokeDexBasicUITests.framework */,
 				F7C69FF140EFCD093BD66983 /* Pods_PokeDexBasicTests.framework */,
@@ -310,7 +320,7 @@
 		};
 		59D4453565BF2B6235DB5D0A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
