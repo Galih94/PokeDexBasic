@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "85F0097D-7261-4F5F-A6B9-4FCAFE0ADC63",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PokeDexBasic.xcodeproj",
+      "identifier" : "2AD61CC22E39A68B009385D1",
+      "name" : "PokeDexBasic"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PokeDexBasic.xcodeproj",
+        "identifier" : "2AD61CD82E39A68D009385D1",
+        "name" : "PokeDexBasicTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PokeDexBasic.xcodeproj",
+        "identifier" : "2AD61CE22E39A68D009385D1",
+        "name" : "PokeDexBasicUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

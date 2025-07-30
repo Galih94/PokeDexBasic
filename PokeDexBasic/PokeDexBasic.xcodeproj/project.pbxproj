@@ -28,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2ACF27002E39C13E00EE3747 /* PokeDexBasic.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PokeDexBasic.xctestplan; sourceTree = "<group>"; };
 		2AD61CC32E39A68B009385D1 /* PokeDexBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeDexBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AD61CD92E39A68D009385D1 /* PokeDexBasicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokeDexBasicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AD61CE32E39A68D009385D1 /* PokeDexBasicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokeDexBasicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +94,7 @@
 		2AD61CBA2E39A68B009385D1 = {
 			isa = PBXGroup;
 			children = (
+				2ACF27002E39C13E00EE3747 /* PokeDexBasic.xctestplan */,
 				2AD61CC52E39A68B009385D1 /* PokeDexBasic */,
 				2AD61CDC2E39A68D009385D1 /* PokeDexBasicTests */,
 				2AD61CE62E39A68D009385D1 /* PokeDexBasicUITests */,
