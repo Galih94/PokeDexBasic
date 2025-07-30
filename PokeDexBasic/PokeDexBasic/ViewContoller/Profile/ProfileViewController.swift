@@ -9,7 +9,12 @@ import UIKit
 import XLPagerTabStrip
 
 final class ProfileViewController: UIViewController {
-    init() {
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    let viewModel: IProfileViewModel
+    
+    init(viewModel: IProfileViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: "ProfileViewController", bundle: nil)
     }
     
@@ -19,8 +24,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        nameLabel.text = viewModel.getName()
     }
     
 }

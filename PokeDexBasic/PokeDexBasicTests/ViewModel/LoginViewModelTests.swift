@@ -9,7 +9,7 @@ import XCTest
 @testable import PokeDexBasic
 
 final class LoginViewModelTests: XCTestCase {
-    func testSaveLoadDeleteCalled() {
+    func testRegisterCalled() {
         let (sut, loader) = makeSUT(onRegister: {})
         sut.register("test name")
         

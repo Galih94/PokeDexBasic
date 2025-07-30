@@ -7,7 +7,8 @@
 
 enum MainPageComposer {
     static func compose() -> MainTabViewController {
-        let profile = ProfileViewController()
+        let profileViewModel = ProfileViewModel(loader: RealmLocalData())
+        let profile = ProfileViewController(viewModel: profileViewModel)
         let home = HomeViewController()
         let mainTab = MainTabViewController(pages: [home, profile])
         
