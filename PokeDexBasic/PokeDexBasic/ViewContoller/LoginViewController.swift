@@ -9,6 +9,7 @@ import UIKit
 
 public final class LoginViewController: UIViewController {
 
+    @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     let viewModel: ILoginViewModel
     
@@ -24,10 +25,25 @@ public final class LoginViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        nameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        setRegisterButtonEnabled(false)
     }
 
     @IBAction func registerTapped(_ sender: Any) {
         viewModel.register(nameTextField.text ?? "")
     }
+    
+    func setRegisterButtonEnabled(_ enabled: Bool) {
+        registerButton.isEnabled = enabled
+        registerButton.alpha = enabled ? 1.0 : 0.5
+    }
+}
+
+// Textfield delegate
+extension LoginViewController {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        let isEmpty = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+        setRegisterButtonEnabled(!isEmpty)
+    }
+
 }
