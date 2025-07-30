@@ -14,7 +14,7 @@ public struct User: Equatable  {
         self.name = name
     }
     
-    func map() -> RealmUser {
+    func mapToRealmUser() -> RealmUser {
         let obj = RealmUser()
         obj.name = name
         return obj
@@ -24,7 +24,7 @@ public struct User: Equatable  {
 class RealmUser: Object {
     @Persisted var name: String = ""
     
-    func map() -> User {
+    func mapToUser() -> User {
         return User(name: name)
     }
 }

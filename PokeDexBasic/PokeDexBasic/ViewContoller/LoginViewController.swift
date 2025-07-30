@@ -9,6 +9,7 @@ import UIKit
 
 public final class LoginViewController: UIViewController {
 
+    @IBOutlet weak var nameTextField: UITextField!
     let viewModel: ILoginViewModel
     
     init(viewModel: ILoginViewModel) {
@@ -26,4 +27,7 @@ public final class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func registerTapped(_ sender: Any) {
+        viewModel.register(nameTextField.text ?? "")
+    }
 }
