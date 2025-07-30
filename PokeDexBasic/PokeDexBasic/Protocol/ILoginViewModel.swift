@@ -6,6 +6,6 @@
 //
 
 protocol ILoginViewModel {
-    var onRegisterSuccess: (() -> Void) { get set }
+    var onRegister: (() -> Void) { get set }
     func register(_ name: String)
 }

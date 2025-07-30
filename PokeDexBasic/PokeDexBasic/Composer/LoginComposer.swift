@@ -6,8 +6,8 @@
 //
 
 public enum LoginComposer {
-    public static func compose(loader: ILocalUser, onRegisterSuccess: @escaping () -> Void ) -> LoginViewController {
-        let viewModel = LoginViewModel(loader: loader, onRegisterSuccess: onRegisterSuccess)
+    public static func compose(loader: ILocalUser, onRegister: @escaping () -> Void ) -> LoginViewController {
+        let viewModel = LoginViewModel(loader: loader, onRegister: onRegister)
         let viewController = LoginViewController(viewModel: viewModel)
         
         return viewController
