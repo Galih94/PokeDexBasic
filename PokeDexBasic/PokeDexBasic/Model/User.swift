@@ -5,8 +5,7 @@
 //  Created by Galih Samudra on 29/07/25.
 //
 
-//import RealmSwift
-//import Alamofire
+import RealmSwift
 
 public struct User: Equatable  {
     public let name: String
@@ -15,17 +14,17 @@ public struct User: Equatable  {
         self.name = name
     }
     
-//    func testhere() {
-//        AF.request("https://pokeapi.co/api/v2/pokemon").response { response in
-//            print(response)
-//        }
-//    }
+    func map() -> RealmUser {
+        let obj = RealmUser()
+        obj.name = name
+        return obj
+    }
 }
-//
-//class RealmUser: Object {
-//    @Persisted var name: String = ""
-//    
-//    func map() -> User {
-//        return User(name: name)
-//    }
-//}
+
+class RealmUser: Object {
+    @Persisted var name: String = ""
+    
+    func map() -> User {
+        return User(name: name)
+    }
+}
