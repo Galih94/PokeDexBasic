@@ -22,29 +22,34 @@ final class MainTabViewController: ButtonBarPagerTabStripViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+            // Must set styles before calling super.viewDidLoad()
+            settings.style.buttonBarBackgroundColor = .systemCyan
+            settings.style.buttonBarItemBackgroundColor = .systemCyan
+            settings.style.selectedBarBackgroundColor = .white
+            settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
+            settings.style.selectedBarHeight = 3.0
+            settings.style.buttonBarMinimumLineSpacing = 0
+            settings.style.buttonBarItemsShouldFillAvailableWidth = true
+            settings.style.buttonBarItemTitleColor = .white
 
-        // Allow layout under status bar, but not under notch
-        self.edgesForExtendedLayout = [.bottom]
+            super.viewDidLoad()
 
-        // Background color
-        view.backgroundColor = .systemBackground
-        containerView.backgroundColor = .systemBackground
+            // Remove layout margins that might cause visual gap
+            buttonBarView.layoutMargins = .zero
+            buttonBarView.backgroundColor = .systemCyan
+            buttonBarView.selectedBar.backgroundColor = .white
 
-        // Customize tab appearance
-        settings.style.buttonBarBackgroundColor = .systemCyan
-        settings.style.buttonBarItemBackgroundColor = .systemCyan
-        settings.style.selectedBarBackgroundColor = .white
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-        settings.style.selectedBarHeight = 0
-        settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .white
-        settings.style.buttonBarItemsShouldFillAvailableWidth = true
-        buttonBarView.selectedBar.backgroundColor = .white
+            // Set backgroundColor on all cells to prevent vertical lines
+            changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, _, _, _) in
+                oldCell?.backgroundColor = .systemCyan
+                newCell?.backgroundColor = .systemCyan
+                oldCell?.label.textColor = .white
+                newCell?.label.textColor = .white
+            }
 
-        // Optional: remove nav bar if inside UINavigationController
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
+            self.edgesForExtendedLayout = []
+            self.view.backgroundColor = .white
+        }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
