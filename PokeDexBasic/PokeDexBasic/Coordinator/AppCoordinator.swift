@@ -24,6 +24,8 @@ final class AppCoordinator {
 extension AppCoordinator {
     func composeLoginVC() -> LoginViewController {
         let loader = RealmLocalData()
-        return LoginComposer.compose(loader: loader)
+        return LoginComposer.compose(loader: loader, onRegisterSuccess: {
+            
+        })
     }
 }

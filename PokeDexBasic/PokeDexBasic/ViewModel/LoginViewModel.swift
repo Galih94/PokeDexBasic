@@ -5,16 +5,16 @@
 //  Created by Galih Samudra on 29/07/25.
 //
 
-final class LoginViewModel {
+final class LoginViewModel: ILoginViewModel {
+    var onRegisterSuccess: () -> Void
     let loader: ILocalUser
     
-    init(loader: ILocalUser) {
+    init(loader: ILocalUser, onRegisterSuccess: @escaping () -> Void) {
         self.loader = loader
+        self.onRegisterSuccess = onRegisterSuccess
     }
-}
-
-extension LoginViewModel: ILoginViewModel {
     func register(_ name: String) {
         loader.save(User(name: name))
+        onRegisterSuccess()
     }
 }

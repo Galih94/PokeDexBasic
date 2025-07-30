@@ -10,7 +10,7 @@ import XCTest
 
 final class LoginViewModelTests: XCTestCase {
     func testSaveLoadDeleteCalled() {
-        let (sut, loader) = makeSUT()
+        let (sut, loader) = makeSUT(onRegisterSuccess: {})
         sut.register("test name")
         
         XCTAssertEqual(loader.requests, [.save(User(name: "test name"))])
@@ -18,9 +18,9 @@ final class LoginViewModelTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (LoginViewModel, LocalUserDataSpy) {
+    private func makeSUT(onRegisterSuccess: @escaping () -> Void, file: StaticString = #filePath, line: UInt = #line) -> (LoginViewModel, LocalUserDataSpy) {
         let loader = LocalUserDataSpy()
-        let sut = LoginViewModel(loader: loader)
+        let sut = LoginViewModel(loader: loader, onRegisterSuccess: onRegisterSuccess)
         trackForMemoryLeak(sut, file: file, line: line)
         trackForMemoryLeak(loader, file: file, line: line)
         
