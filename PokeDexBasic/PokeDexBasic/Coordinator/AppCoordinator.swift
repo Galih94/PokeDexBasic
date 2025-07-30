@@ -15,8 +15,7 @@ final class AppCoordinator {
     }
     
     func start() {
-        let vc = composeLoginVC()
-        navigationController.setViewControllers([vc], animated: false)
+        goToLogin()
     }
 }
 
@@ -24,8 +23,25 @@ final class AppCoordinator {
 extension AppCoordinator {
     func composeLoginVC() -> LoginViewController {
         let loader = RealmLocalData()
-        return LoginComposer.compose(loader: loader, onRegister: {
-            
+        return LoginComposer.compose(loader: loader, onRegister: { [weak self] in
+            self?.goToMainTab()
         })
+    }
+    
+    func goToLogin() {
+        let vc = composeLoginVC()
+        navigationController.setViewControllers([vc], animated: false)
+    }
+}
+
+// Main Tab
+extension AppCoordinator {
+    func composeMainTabVC() -> MainTabViewController {
+        return MainPageComposer.compose()
+    }
+    
+    func goToMainTab() {
+        let vc = composeMainTabVC()
+        navigationController.pushViewController(vc, animated: true)
     }
 }
