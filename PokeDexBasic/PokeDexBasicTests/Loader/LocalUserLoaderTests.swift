@@ -25,45 +25,11 @@ final class LocalUserLoaderTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    enum LocalUserRequests: Equatable  {
-        case save(User), load, delete
-        static func == (lhs: LocalUserRequests, rhs: LocalUserRequests) -> Bool {
-            switch (lhs, rhs) {
-            case let (.save(lhsUser), .save(rhsUser)):
-                return lhsUser == rhsUser
-            case (.load, .load), (.delete, .delete):
-                return true
-            default:
-                return false
-            }
-        }
-    }
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> LocalUserDataSpy {
         let sut = LocalUserDataSpy()
         trackForMemoryLeak(sut, file: file, line: line)
         
         return sut
-    }
-    
-    class LocalUserDataSpy: ILocalUser {
-        
-        var currentUser: User?
-        var requests: [LocalUserRequests] = []
-
-        func save(_ user: User) {
-            currentUser = user
-            requests.append(.save(user))
-        }
-
-        func load() -> User? {
-            requests.append(.load)
-            return currentUser
-        }
-        
-        func delete() {
-            currentUser = nil
-            requests.append(.delete)
-        }
     }
 }
