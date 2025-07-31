@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A8DD04B2E39B4D5009C115B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A8DD04A2E39B4D5009C115B /* RealmSwift */; };
 		2ACF27072E39D43C00EE3747 /* XLPagerTabStrip in Frameworks */ = {isa = PBXBuildFile; productRef = 2ACF27062E39D43C00EE3747 /* XLPagerTabStrip */; };
+		2AF6831F2E3AF7C500084F00 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF6831E2E3AF7C500084F00 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A8DD04B2E39B4D5009C115B /* RealmSwift in Frameworks */,
+				2AF6831F2E3AF7C500084F00 /* RealmSwift in Frameworks */,
 				2ACF27072E39D43C00EE3747 /* XLPagerTabStrip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,9 +134,8 @@
 			);
 			name = PokeDexBasic;
 			packageProductDependencies = (
-				2A8DD0482E39B4D5009C115B /* Realm */,
-				2A8DD04A2E39B4D5009C115B /* RealmSwift */,
 				2ACF27062E39D43C00EE3747 /* XLPagerTabStrip */,
+				2AF6831E2E3AF7C500084F00 /* RealmSwift */,
 			);
 			productName = PokeDexBasic;
 			productReference = 2AD61CC32E39A68B009385D1 /* PokeDexBasic.app */;
@@ -221,8 +220,8 @@
 			mainGroup = 2AD61CBA2E39A68B009385D1;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2A8DD0472E39B4D5009C115B /* XCRemoteSwiftPackageReference "realm-swift" */,
 				2ACF27052E39D43C00EE3747 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */,
+				2AF6831D2E3AF7C500084F00 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2AD61CC42E39A68B009385D1 /* Products */;
@@ -589,14 +588,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2A8DD0472E39B4D5009C115B /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.47.0;
-			};
-		};
 		2ACF27052E39D43C00EE3747 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/xmartlabs/XLPagerTabStrip";
@@ -605,23 +596,26 @@
 				minimumVersion = 9.1.0;
 			};
 		};
+		2AF6831D2E3AF7C500084F00 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.47.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2A8DD0482E39B4D5009C115B /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2A8DD0472E39B4D5009C115B /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		2A8DD04A2E39B4D5009C115B /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2A8DD0472E39B4D5009C115B /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		2ACF27062E39D43C00EE3747 /* XLPagerTabStrip */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2ACF27052E39D43C00EE3747 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */;
 			productName = XLPagerTabStrip;
+		};
+		2AF6831E2E3AF7C500084F00 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AF6831D2E3AF7C500084F00 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

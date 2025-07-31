@@ -9,6 +9,9 @@ import UIKit
 import XLPagerTabStrip
 
 final class HomeViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     init() {
         super.init(nibName: "HomeViewController", bundle: nil)
     }
