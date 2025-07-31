@@ -19,6 +19,15 @@ final class PokemonListComposerTests: XCTestCase {
         XCTAssertEqual(sutTenPokemon.getURL(), "https://pokeapi.co/api/v2/pokemon?limit=10&offset=10")
     }
     
+    func testGetCurrentPokemonList() {
+        let sutZeroPokemon = makeSUT(pokemonList: generatePokemons(0))
+        XCTAssertEqual(sutZeroPokemon.getCurrentPokemons(), [])
+        
+        let tenPokemon = generatePokemons(10)
+        let sutTenPokemon = makeSUT(pokemonList: tenPokemon)
+        XCTAssertEqual(sutTenPokemon.getCurrentPokemons(), tenPokemon)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(pokemonList: [Pokemon], file: StaticString = #filePath, line: UInt = #line) -> PokemonListURLComposer {

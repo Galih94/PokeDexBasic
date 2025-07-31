@@ -8,6 +8,7 @@
 
 protocol IPokemonListURLComposer {
     func getURL() -> String
+    func getCurrentPokemons() -> [Pokemon]
 }
 
 protocol IPokemonListLoader {

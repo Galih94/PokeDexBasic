@@ -16,5 +16,9 @@ final class PokemonListURLComposer: IPokemonListURLComposer {
     func getURL() -> String {
         return "https://pokeapi.co/api/v2/pokemon?limit=\(MAX_POKEMON_PER_FETCH)&offset=\(pokemonList.count)"
     }
+    
+    func getCurrentPokemons() -> [Pokemon] {
+        return pokemonList
+    }
 }
 

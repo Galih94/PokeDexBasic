@@ -15,9 +15,10 @@ final class PokemonListLoaderTests: XCTestCase {
         let sut = makeSUT()
         XCTAssertEqual(sut.requests, [])
         
-        let mockURLComposer = MockPokemonListURLComposer()
-        sut.load(mockURLComposer, completion: {_ in })
+        let spyURLComposer = PokemonListURLComposerSpy(pokemons: [])
+        sut.load(spyURLComposer, completion: {_ in })
         XCTAssertEqual(sut.requests, [.load("https://test-url.com")])
+        XCTAssertEqual(spyURLComposer.getCurrentPokemons(), [])
     }
     
     // MARK: - Helpers
@@ -28,7 +29,18 @@ final class PokemonListLoaderTests: XCTestCase {
         return sut
     }
     
-    final class MockPokemonListURLComposer: IPokemonListURLComposer {
+    final class PokemonListURLComposerSpy: IPokemonListURLComposer {
+        
+        private let pokemons: [Pokemon]
+        
+        init(pokemons: [Pokemon]) {
+            self.pokemons = pokemons
+        }
+        
+        func getCurrentPokemons() -> [PokeDexBasic.Pokemon] {
+            return pokemons
+        }
+        
         func getURL() -> String {
             return "https://test-url.com"
         }
