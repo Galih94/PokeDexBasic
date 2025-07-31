@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,35 +19,17 @@
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BmY-e8-1Vp">
                         <rect key="frame" x="0.0" y="0.0" width="425" height="64"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZ4-2l-nQt">
-                                <rect key="frame" x="0.0" y="0.0" width="84" height="64"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gBD-9n-ltb">
-                                        <rect key="frame" x="32" y="12" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="8hV-68-O5D"/>
-                                            <constraint firstAttribute="height" constant="40" id="lV5-5K-5Nx"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="gBD-9n-ltb" firstAttribute="leading" secondItem="gZ4-2l-nQt" secondAttribute="leading" constant="32" id="4be-5i-1Oz"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gBD-9n-ltb" secondAttribute="bottom" constant="12" id="G2Y-a6-Icf"/>
-                                    <constraint firstItem="gBD-9n-ltb" firstAttribute="centerY" secondItem="gZ4-2l-nQt" secondAttribute="centerY" id="NGw-h2-5B2"/>
-                                    <constraint firstItem="gBD-9n-ltb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gZ4-2l-nQt" secondAttribute="top" constant="12" id="fJ2-GO-axS"/>
-                                    <constraint firstAttribute="trailing" secondItem="gBD-9n-ltb" secondAttribute="trailing" constant="12" id="fcd-Bi-BOp"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-T3-Oql">
-                                <rect key="frame" x="84" y="0.0" width="341" height="64"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-T3-Oql">
+                                <rect key="frame" x="0.0" y="0.0" width="425" height="64"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="BmY-e8-1Vp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LQ3-tF-Jwy"/>
                     <constraint firstAttribute="trailing" secondItem="BmY-e8-1Vp" secondAttribute="trailing" id="RfB-PL-Dnt"/>
@@ -57,16 +38,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="nameLabel" destination="hbl-T3-Oql" id="ojw-wT-YMh"/>
-                <outlet property="pokemonImageView" destination="gBD-9n-ltb" id="5Jd-SA-vpK"/>
             </connections>
             <point key="canvasLocation" x="219.08396946564883" y="27.464788732394368"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

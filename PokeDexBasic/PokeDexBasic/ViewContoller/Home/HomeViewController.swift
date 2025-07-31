@@ -60,6 +60,7 @@ extension HomeViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonTableViewCell", for: indexPath) as? PokemonTableViewCell else { return UITableViewCell() }
 
         cell.nameLabel.text = item.name
+        cell.selectionStyle = .none
         return cell
     }
 }
@@ -73,8 +74,8 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 200 // ← Set your desired height
-        }
+            return 50
+    }
 }
 
 extension HomeViewController: IndicatorInfoProvider {

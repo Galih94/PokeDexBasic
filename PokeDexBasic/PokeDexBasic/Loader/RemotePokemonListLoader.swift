@@ -33,7 +33,7 @@ final class RemotePokemonListLoader: IPokemonListLoader {
     }
     
     private func requestApi(_ url: String, completion: @escaping (Result) -> Void) {
-        AF.request(url).responseData { response in
+        AF.request(url).validate().responseData { response in
             switch response.result {
             case .success(let data):
                 completion(RemotePokemonListLoader.map(data: data))
@@ -58,11 +58,7 @@ final class RemotePokemonListLoader: IPokemonListLoader {
 private extension Array where Element == RemotePokemon {
     func toModels() -> [Pokemon] {
         return map { pokemon in
-            let urlString = pokemon.url
-            var replacedURL = urlString.replacingOccurrences(of: "https://pokeapi.co/api/v2/pokemon/", with: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/")
-            replacedURL.removeLast()
-            let spriteURL = replacedURL + ".png"
-            return Pokemon(name: pokemon.name, url: spriteURL )
+            return Pokemon(name: pokemon.name, url: pokemon.url )
         }
     }
 }
