@@ -10,3 +10,7 @@ protocol IPokemonListURLComposer {
     func getURL(_ pokemonList: [Pokemon]) -> String
 }
 
+protocol IPokemonListLoader {
+    func load(_ urlGenerator: IPokemonListURLComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void)
+}
+

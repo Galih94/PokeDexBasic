@@ -9,17 +9,6 @@
 import XCTest
 @testable import PokeDexBasic
 
-
-protocol IPokemonListLoader {
-    func load(_ urlGenerator: IPokemonListURLComposer) -> [Pokemon]
-}
-
-final class RemotePokemonListLoader: IPokemonListLoader {
-    func load(_ urlGenerator: IPokemonListURLComposer) -> [Pokemon] {
-        return []
-    }
-}
-
 final class PokemonListLoaderTests: XCTestCase {
     
     func testLoad() {
@@ -27,7 +16,7 @@ final class PokemonListLoaderTests: XCTestCase {
         XCTAssertEqual(sut.requests, [])
         
         let mockURLComposer = MockPokemonListURLComposer()
-        let _ = sut.load(mockURLComposer)
+        sut.load(mockURLComposer, completion: {_ in })
         XCTAssertEqual(sut.requests, [.load("https://test-url.com")])
     }
     
@@ -53,9 +42,8 @@ final class PokemonListLoaderTests: XCTestCase {
     final class PokemonListLoaderSpy: IPokemonListLoader {
         var requests: [PokemonListLoaderRequests] = []
         
-        func load(_ urlGenerator: IPokemonListURLComposer) -> [Pokemon] {
+        func load(_ urlGenerator: IPokemonListURLComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
             requests.append(.load(urlGenerator.getURL([])))
-            return []
         }
     }
 
