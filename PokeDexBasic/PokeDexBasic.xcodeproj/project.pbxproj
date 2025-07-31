@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A84182A2E3AFA0200C58A9B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2A8418292E3AFA0200C58A9B /* Alamofire */; };
 		2ACF27072E39D43C00EE3747 /* XLPagerTabStrip in Frameworks */ = {isa = PBXBuildFile; productRef = 2ACF27062E39D43C00EE3747 /* XLPagerTabStrip */; };
 		2AF6831F2E3AF7C500084F00 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF6831E2E3AF7C500084F00 /* RealmSwift */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A84182A2E3AFA0200C58A9B /* Alamofire in Frameworks */,
 				2AF6831F2E3AF7C500084F00 /* RealmSwift in Frameworks */,
 				2ACF27072E39D43C00EE3747 /* XLPagerTabStrip in Frameworks */,
 			);
@@ -136,6 +138,7 @@
 			packageProductDependencies = (
 				2ACF27062E39D43C00EE3747 /* XLPagerTabStrip */,
 				2AF6831E2E3AF7C500084F00 /* RealmSwift */,
+				2A8418292E3AFA0200C58A9B /* Alamofire */,
 			);
 			productName = PokeDexBasic;
 			productReference = 2AD61CC32E39A68B009385D1 /* PokeDexBasic.app */;
@@ -222,6 +225,7 @@
 			packageReferences = (
 				2ACF27052E39D43C00EE3747 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */,
 				2AF6831D2E3AF7C500084F00 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				2A8418282E3AFA0200C58A9B /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2AD61CC42E39A68B009385D1 /* Products */;
@@ -588,6 +592,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2A8418282E3AFA0200C58A9B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 		2ACF27052E39D43C00EE3747 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/xmartlabs/XLPagerTabStrip";
@@ -607,6 +619,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2A8418292E3AFA0200C58A9B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A8418282E3AFA0200C58A9B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		2ACF27062E39D43C00EE3747 /* XLPagerTabStrip */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2ACF27052E39D43C00EE3747 /* XCRemoteSwiftPackageReference "XLPagerTabStrip" */;
