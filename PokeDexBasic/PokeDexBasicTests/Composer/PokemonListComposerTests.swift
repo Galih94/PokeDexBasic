@@ -30,8 +30,8 @@ final class PokemonListComposerTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(pokemonList: [Pokemon], file: StaticString = #filePath, line: UInt = #line) -> PokemonListURLComposer {
-        let sut = PokemonListURLComposer(pokemonList: pokemonList)
+    private func makeSUT(pokemonList: [Pokemon], file: StaticString = #filePath, line: UInt = #line) -> PokemonListDataComposer {
+        let sut = PokemonListDataComposer(pokemonList: pokemonList)
         trackForMemoryLeak(sut, file: file, line: line)
         
         return sut

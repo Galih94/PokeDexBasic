@@ -6,13 +6,13 @@
 //
 
 
-protocol IPokemonListURLComposer {
+protocol IPokemonListDataComposer {
     func getURL() -> String
     func getCurrentPokemons() -> [Pokemon]
 }
 
 protocol IPokemonListLoader {
     typealias Result = Swift.Result<[Pokemon], Error>
-    func load(_ urlGenerator: IPokemonListURLComposer, completion: @escaping (Result) -> Void)
+    func load(_ urlGenerator: IPokemonListDataComposer, completion: @escaping (Result) -> Void)
 }
 

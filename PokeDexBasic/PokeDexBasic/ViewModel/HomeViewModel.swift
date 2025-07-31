@@ -29,15 +29,16 @@ final class HomeViewModel: IHomeViewModel {
     }
 
     private func loadPage() {
+        print("res hit load")
         guard !isLoading else { return }
         isLoading = true
-
-        let urlComposer = PokemonListURLComposer(pokemonList: pokemons.value)
-        loader.load(urlComposer) { [weak self] result in
+        print("res hit load success")
+        let dataComposer = PokemonListDataComposer(pokemonList: pokemons.value)
+        loader.load(dataComposer) { [weak self] result in
             switch result {
             case .success(let success):
                 self?.pokemons.accept(success)
-            case .failure(let failure):
+            case .failure:
                 break
             }
             self?.isLoading = false

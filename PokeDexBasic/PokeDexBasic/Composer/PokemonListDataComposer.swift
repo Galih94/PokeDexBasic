@@ -1,11 +1,11 @@
 //
-//  PokemonListURLComposer.swift
+//  PokemonListDataComposer.swift
 //  PokeDexBasic
 //
 //  Created by Galih Samudra on 31/07/25.
 //
 
-final class PokemonListURLComposer: IPokemonListURLComposer {
+final class PokemonListDataComposer: IPokemonListDataComposer {
     private let MAX_POKEMON_PER_FETCH = 10
     let pokemonList: [Pokemon]
     
@@ -14,7 +14,8 @@ final class PokemonListURLComposer: IPokemonListURLComposer {
     }
     
     func getURL() -> String {
-        return "https://pokeapi.co/api/v2/pokemon?limit=\(MAX_POKEMON_PER_FETCH)&offset=\(pokemonList.count)"
+        let res = "https://pokeapi.co/api/v2/pokemon?limit=\(MAX_POKEMON_PER_FETCH)&offset=\(pokemonList.count)"
+        return res
     }
     
     func getCurrentPokemons() -> [Pokemon] {

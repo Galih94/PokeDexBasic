@@ -35,6 +35,7 @@ final class HomeViewController: UIViewController {
     private func setupTableView() {
         tableView.register(UINib(nibName: "PokemonTableViewCell", bundle: nil), forCellReuseIdentifier: "PokemonTableViewCell")
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     private func bindTableView() {
@@ -42,18 +43,6 @@ final class HomeViewController: UIViewController {
             .asDriver()
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
-            })
-            .disposed(by: disposeBag)
-        
-        tableView.rx.contentOffset
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] offset in
-                guard let self = self else { return }
-                let y = offset.y
-                let threshold = tableView.contentSize.height - tableView.frame.size.height
-                if y > threshold - 100 {
-                    self.viewModel.loadMoreIfNeeded()
-                }
             })
             .disposed(by: disposeBag)
     }
@@ -75,6 +64,18 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastItemIndex = viewModel.pokemons.value.count - 1
+        if indexPath.row == lastItemIndex {
+            viewModel.loadMoreIfNeeded()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 200 // ← Set your desired height
+        }
+}
 
 extension HomeViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

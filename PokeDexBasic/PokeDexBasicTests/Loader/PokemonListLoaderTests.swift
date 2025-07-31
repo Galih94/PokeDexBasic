@@ -15,10 +15,10 @@ final class PokemonListLoaderTests: XCTestCase {
         let sut = makeSUT()
         XCTAssertEqual(sut.requests, [])
         
-        let spyURLComposer = PokemonListURLComposerSpy(pokemons: [])
-        sut.load(spyURLComposer, completion: {_ in })
+        let spyDataComposer = PokemonListDataComposerSpy(pokemons: [])
+        sut.load(spyDataComposer, completion: {_ in })
         XCTAssertEqual(sut.requests, [.load("https://test-url.com")])
-        XCTAssertEqual(spyURLComposer.getCurrentPokemons(), [])
+        XCTAssertEqual(spyDataComposer.getCurrentPokemons(), [])
     }
     
     // MARK: - Helpers
@@ -29,7 +29,7 @@ final class PokemonListLoaderTests: XCTestCase {
         return sut
     }
     
-    final class PokemonListURLComposerSpy: IPokemonListURLComposer {
+    final class PokemonListDataComposerSpy: IPokemonListDataComposer {
         
         private let pokemons: [Pokemon]
         
@@ -53,7 +53,7 @@ final class PokemonListLoaderTests: XCTestCase {
     final class PokemonListLoaderSpy: IPokemonListLoader {
         var requests: [PokemonListLoaderRequests] = []
         
-        func load(_ urlGenerator: IPokemonListURLComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
+        func load(_ urlGenerator: IPokemonListDataComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
             requests.append(.load(urlGenerator.getURL()))
         }
     }
