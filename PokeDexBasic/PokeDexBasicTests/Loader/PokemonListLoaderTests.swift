@@ -24,15 +24,17 @@ final class PokemonListLoaderTests: XCTestCase {
     
     func testLoad() {
         let sut = makeSUT()
-        let mockURLComposer = MockPokemonListURLComposer()
+        XCTAssertEqual(sut.requests, [])
         
-        XCTAssertEqual(sut.load(mockURLComposer), [])
+        let mockURLComposer = MockPokemonListURLComposer()
+        let _ = sut.load(mockURLComposer)
+        XCTAssertEqual(sut.requests, [.load("https://test-url.com")])
     }
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> IPokemonListLoader {
-        let sut = RemotePokemonListLoader()
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> PokemonListLoaderSpy {
+        let sut = PokemonListLoaderSpy()
         trackForMemoryLeak(sut, file: file, line: line)
         
         return sut
@@ -43,4 +45,18 @@ final class PokemonListLoaderTests: XCTestCase {
             return "https://test-url.com"
         }
     }
+    
+    enum PokemonListLoaderRequests: Equatable  {
+        case load(String)
+    }
+    
+    final class PokemonListLoaderSpy: IPokemonListLoader {
+        var requests: [PokemonListLoaderRequests] = []
+        
+        func load(_ urlGenerator: IPokemonListURLComposer) -> [Pokemon] {
+            requests.append(.load(urlGenerator.getURL([])))
+            return []
+        }
+    }
+
 }
