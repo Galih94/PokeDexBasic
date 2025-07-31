@@ -66,6 +66,11 @@ extension HomeViewController: UITableViewDataSource {
 }
 
 extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = viewModel.pokemons.value[indexPath.row]
+        viewModel.onTappedPokemon?(item)
+    }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastItemIndex = viewModel.pokemons.value.count - 1
         if indexPath.row == lastItemIndex {

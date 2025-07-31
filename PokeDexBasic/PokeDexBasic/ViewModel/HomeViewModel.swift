@@ -10,16 +10,19 @@ import RxRelay
 
 protocol IHomeViewModel {
     var pokemons: BehaviorRelay<[Pokemon]> { get }
+    var onTappedPokemon: ((Pokemon) -> Void)? { get set }
     func loadMoreIfNeeded()
 }
 
 final class HomeViewModel: IHomeViewModel {
+    var onTappedPokemon: ((Pokemon) -> Void)?
     private(set) var pokemons = BehaviorRelay<[Pokemon]>(value: [])
     private var isLoading = false
     private let loader: IPokemonListLoader
     
-    init(loader: IPokemonListLoader) {
+    init(loader: IPokemonListLoader, onTappedPokemon: ((Pokemon) -> Void)?) {
         self.loader = loader
+        self.onTappedPokemon = onTappedPokemon
     }
 
     func loadMoreIfNeeded() {

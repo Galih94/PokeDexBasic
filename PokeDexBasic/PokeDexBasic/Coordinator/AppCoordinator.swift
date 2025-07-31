@@ -37,11 +37,25 @@ extension AppCoordinator {
 // Main Tab
 extension AppCoordinator {
     func composeMainTabVC() -> MainTabViewController {
-        return MainPageComposer.compose()
+        return MainPageComposer.compose(onTappedPokemon: { [weak self] pokemon in
+            self?.goToDetail()
+        })
     }
     
     func goToMainTab() {
         let vc = composeMainTabVC()
         navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+// Detail
+extension AppCoordinator {
+    func composeDetailVC() -> DetailViewController {
+        return DetailComposer.compose()
+    }
+    
+    func goToDetail() {
+        let vc = composeDetailVC()
+        navigationController.setViewControllers([vc], animated: false)
     }
 }
