@@ -13,8 +13,4 @@ struct Pokemon: Equatable {
 struct RemotePokemon: Codable, Equatable {
     let name: String
     let url: String
-    
-    func mapToPokemon() -> Pokemon {
-        return Pokemon(name: name, url: url)
-    }
 }

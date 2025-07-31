@@ -8,8 +8,9 @@
 enum MainPageComposer {
     static func compose() -> MainTabViewController {
         let profileViewModel = ProfileViewModel(loader: RealmLocalData())
+        let homeViewModel = HomeViewModel(loader: RemotePokemonListLoader())
         let profile = ProfileViewController(viewModel: profileViewModel)
-        let home = HomeViewController()
+        let home = HomeViewController(viewModel: homeViewModel)
         let mainTab = MainTabViewController(pages: [home, profile])
         
         return mainTab

@@ -12,6 +12,7 @@ protocol IPokemonListURLComposer {
 }
 
 protocol IPokemonListLoader {
-    func load(_ urlGenerator: IPokemonListURLComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void)
+    typealias Result = Swift.Result<[Pokemon], Error>
+    func load(_ urlGenerator: IPokemonListURLComposer, completion: @escaping (Result) -> Void)
 }
 
