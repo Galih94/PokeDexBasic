@@ -21,7 +21,6 @@ final class PokemonListLoaderTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> PokemonListLoaderSpy {
         let sut = PokemonListLoaderSpy()
         trackForMemoryLeak(sut, file: file, line: line)
@@ -30,7 +29,7 @@ final class PokemonListLoaderTests: XCTestCase {
     }
     
     final class MockPokemonListURLComposer: IPokemonListURLComposer {
-        func getURL(_ pokemonList: [PokeDexBasic.Pokemon]) -> String {
+        func getURL() -> String {
             return "https://test-url.com"
         }
     }
@@ -43,7 +42,7 @@ final class PokemonListLoaderTests: XCTestCase {
         var requests: [PokemonListLoaderRequests] = []
         
         func load(_ urlGenerator: IPokemonListURLComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
-            requests.append(.load(urlGenerator.getURL([])))
+            requests.append(.load(urlGenerator.getURL()))
         }
     }
 

@@ -12,16 +12,17 @@ import XCTest
 final class PokemonListComposerTests: XCTestCase {
     
     func testGetURL() {
-        let sut = makeSUT()
-        XCTAssertEqual(sut.getURL([]), "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
-        XCTAssertEqual(sut.getURL(generatePokemons(10)), "https://pokeapi.co/api/v2/pokemon?limit=10&offset=10")
-        XCTAssertEqual(sut.getURL(generatePokemons(20)), "https://pokeapi.co/api/v2/pokemon?limit=10&offset=20")
+        let sutZeroPokemon = makeSUT(pokemonList: generatePokemons(0))
+        XCTAssertEqual(sutZeroPokemon.getURL(), "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
+        
+        let sutTenPokemon = makeSUT(pokemonList: generatePokemons(10))
+        XCTAssertEqual(sutTenPokemon.getURL(), "https://pokeapi.co/api/v2/pokemon?limit=10&offset=10")
     }
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> PokemonListURLComposer {
-        let sut = PokemonListURLComposer()
+    private func makeSUT(pokemonList: [Pokemon], file: StaticString = #filePath, line: UInt = #line) -> PokemonListURLComposer {
+        let sut = PokemonListURLComposer(pokemonList: pokemonList)
         trackForMemoryLeak(sut, file: file, line: line)
         
         return sut

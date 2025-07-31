@@ -7,7 +7,7 @@
 
 
 protocol IPokemonListURLComposer {
-    func getURL(_ pokemonList: [Pokemon]) -> String
+    func getURL() -> String
 }
 
 protocol IPokemonListLoader {
