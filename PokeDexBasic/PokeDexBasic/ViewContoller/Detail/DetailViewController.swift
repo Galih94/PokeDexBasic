@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var abilitiesLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    private let disposeBag = DisposeBag()
     
     let viewModel: IDetailViewModel
     
@@ -24,23 +26,25 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Navigation controller is: \(self.navigationController)")
-
+        
+        viewModel.loadDetails()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {
-        if let nav = self.navigationController {
-            print("Stack count: \(nav.viewControllers.count)")
-            print("Current VC: \(self)")
-            print("Stack: \(nav.viewControllers)")
-        }
-
         viewModel.onBackTapped?()
     }
     
+    private func bindView() {
+        viewModel.pokemonDetail?
+            .subscribe(onNext: { [weak self] value in
+                self?.nameLabel.text = value.name
+                self?.abilitiesLabel.text = value.abilities.joined(separator: ", ")
+            })
+            .disposed(by: disposeBag)
+    }
 }

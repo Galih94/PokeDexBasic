@@ -6,8 +6,9 @@
 //
 
 enum DetailComposer {
-    static func compose(onBackTapped: @escaping () -> Void) -> DetailViewController {
-        let viewModel = DetailViewModel(onBackTapped: onBackTapped)
+    static func compose(pokemon: Pokemon, onBackTapped: @escaping () -> Void) -> DetailViewController {
+        let loader = RemotePokemonDetailLoader(url: "https://pokeapi.co/api/v2/pokemon")
+        let viewModel = DetailViewModel(loader: loader, pokemon: pokemon, onBackTapped: onBackTapped)
         let viewController = DetailViewController(viewModel: viewModel)
         
         return viewController

@@ -29,7 +29,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         bindTableView()
-        viewModel.loadMoreIfNeeded()
+        viewModel.loadPage()
     }
     
     private func setupTableView() {
@@ -74,7 +74,7 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastItemIndex = viewModel.pokemons.value.count - 1
         if indexPath.row == lastItemIndex {
-            viewModel.loadMoreIfNeeded()
+            viewModel.loadPage()
         }
     }
     

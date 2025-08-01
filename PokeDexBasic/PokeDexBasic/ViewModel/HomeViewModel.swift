@@ -11,7 +11,7 @@ import RxRelay
 protocol IHomeViewModel {
     var pokemons: BehaviorRelay<[Pokemon]> { get }
     var onTappedPokemon: ((Pokemon) -> Void)? { get set }
-    func loadMoreIfNeeded()
+    func loadPage()
 }
 
 final class HomeViewModel: IHomeViewModel {
@@ -24,14 +24,8 @@ final class HomeViewModel: IHomeViewModel {
         self.loader = loader
         self.onTappedPokemon = onTappedPokemon
     }
-
-    func loadMoreIfNeeded() {
-        if !isLoading {
-            loadPage()
-        }
-    }
-
-    private func loadPage() {
+    
+    func loadPage() {
         print("res hit load")
         guard !isLoading else { return }
         isLoading = true

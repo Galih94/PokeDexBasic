@@ -46,7 +46,7 @@ extension AppCoordinator {
 extension AppCoordinator {
     func composeMainTabVC() -> MainTabViewController {
         return MainPageComposer.compose(onTappedPokemon: { [weak self] pokemon in
-            self?.goToDetail()
+            self?.goToDetail(pokemon: pokemon)
         })
     }
     
@@ -58,14 +58,14 @@ extension AppCoordinator {
 
 // Detail
 extension AppCoordinator {
-    func composeDetailVC() -> DetailViewController {
-        return DetailComposer.compose(onBackTapped: { [weak self]  in
+    func composeDetailVC(pokemon: Pokemon) -> DetailViewController {
+        return DetailComposer.compose(pokemon: pokemon, onBackTapped: { [weak self]  in
             self?.pop()
         })
     }
     
-    func goToDetail() {
-        let vc = composeDetailVC()
+    func goToDetail(pokemon: Pokemon) {
+        let vc = composeDetailVC(pokemon: pokemon)
         navigationController.pushViewController(vc, animated: true)
     }
 }
