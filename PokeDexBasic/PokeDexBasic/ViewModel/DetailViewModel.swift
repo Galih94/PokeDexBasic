@@ -9,7 +9,7 @@ import RxSwift
 
 protocol IDetailViewModel {
     var onBackTapped: (() -> Void)? { get set }
-    var pokemonDetail:  PublishSubject<PokemonDetail>? { get }
+    var pokemonDetail:  PublishSubject<PokemonDetail> { get }
     
     func loadDetails()
 }
@@ -21,7 +21,7 @@ final class DetailViewModel: IDetailViewModel {
     let pokemon: Pokemon
     var name: String = ""
     var abilities: [String] = []
-    var pokemonDetail: PublishSubject<PokemonDetail>?
+    var pokemonDetail = PublishSubject<PokemonDetail>()
     
     
     init(loader: IPokemonDetailLoader, pokemon: Pokemon, onBackTapped: (() -> Void)?) {
@@ -34,7 +34,7 @@ final class DetailViewModel: IDetailViewModel {
         loader.load(name: pokemon.name, completion: { [weak self] result in
             switch result {
             case .success(let detail):
-                self?.pokemonDetail?.onNext(detail)
+                self?.pokemonDetail.onNext(detail)
             case .failure(let error):
                 print("Error: \(error)")
             }

@@ -22,15 +22,12 @@ final class RemotePokemonListLoader: IPokemonListLoader {
     
     func load(_ dataComposer: IPokemonListDataComposer, completion: @escaping (Result) -> Void) {
         let url = dataComposer.getURL()
-        print("res is", url)
         requestApi(url) { response in
             switch response {
             case .success(let newPokemon):
                 let allpokemon = dataComposer.getCurrentPokemons() + newPokemon
-                print("res is 1 \(allpokemon.count)")
                 completion(.success(allpokemon))
             case .failure:
-                print("res is error")
                 completion(.failure(Error.connectivity))
             }
         }
@@ -43,7 +40,6 @@ final class RemotePokemonListLoader: IPokemonListLoader {
             case .success(let data):
                 completion(RemotePokemonListLoader.map(data: data))
             case .failure(let errorApi):
-                print("res is errorApi \(errorApi)")
                 completion(.failure(Error.connectivity))
             }
         }

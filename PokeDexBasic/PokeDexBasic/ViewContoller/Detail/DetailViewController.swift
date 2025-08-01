@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bindView()
         viewModel.loadDetails()
     }
     
@@ -40,7 +40,7 @@ class DetailViewController: UIViewController {
     }
     
     private func bindView() {
-        viewModel.pokemonDetail?
+        viewModel.pokemonDetail
             .subscribe(onNext: { [weak self] value in
                 self?.nameLabel.text = value.name
                 self?.abilitiesLabel.text = value.abilities.joined(separator: ", ")
