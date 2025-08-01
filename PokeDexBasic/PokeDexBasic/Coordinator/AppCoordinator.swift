@@ -9,6 +9,7 @@ import UIKit
 
 final class AppCoordinator {
     private let navigationController: UINavigationController
+    private let apiService = PokemonAPIService()
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,10 +20,6 @@ final class AppCoordinator {
     }
     
     func pop() {
-        
-        print("Stack count: \(self.navigationController.viewControllers.count)")
-        print("Current VC: \(self)")
-        print("Stack: \(self.navigationController.viewControllers)")
         navigationController.popViewController(animated: true)
     }
 }
@@ -45,7 +42,7 @@ extension AppCoordinator {
 // Main Tab
 extension AppCoordinator {
     func composeMainTabVC() -> MainTabViewController {
-        return MainPageComposer.compose(onTappedPokemon: { [weak self] pokemon in
+        return MainPageComposer.compose(apiService: apiService, onTappedPokemon: { [weak self] pokemon in
             self?.goToDetail(pokemon: pokemon)
         })
     }
@@ -59,7 +56,7 @@ extension AppCoordinator {
 // Detail
 extension AppCoordinator {
     func composeDetailVC(pokemon: Pokemon) -> DetailViewController {
-        return DetailComposer.compose(pokemon: pokemon, onBackTapped: { [weak self]  in
+        return DetailComposer.compose(pokemon: pokemon, apiService: apiService, onBackTapped: { [weak self]  in
             self?.pop()
         })
     }

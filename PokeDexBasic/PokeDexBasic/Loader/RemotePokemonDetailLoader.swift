@@ -16,6 +16,7 @@ protocol IPokemonDetailLoader {
 
 final class RemotePokemonDetailLoader: IPokemonDetailLoader {
     private let url: String
+    private let apiService: IPokemonAPIService
     
     enum Error: Swift.Error {
         case connectivity
@@ -25,18 +26,20 @@ final class RemotePokemonDetailLoader: IPokemonDetailLoader {
     
     typealias Result = IPokemonDetailLoader.Result
     
-    init (url: String) {
+    init (url: String, apiService: IPokemonAPIService) {
         self.url = url
+        self.apiService = apiService
     }
     
     func load(name: String, completion: @escaping (Result) -> Void) {
-        AF.request(url + "/\(name)").validate().responseData  { [weak self] response in
-            guard self != nil else { return }
-            switch response.result {
-            case let .success(data):
+        apiService.request(url: url + "/\(name)") { response in
+            switch response {
+            case .success(let data):
                 completion(RemotePokemonDetailLoader.map(data: data))
+
             case .failure( _):
                 completion(.failure(Error.connectivity))
+
             }
         }
     }

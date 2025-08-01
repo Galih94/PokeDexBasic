@@ -14,6 +14,11 @@ final class RemotePokemonListLoader: IPokemonListLoader {
         case invalidData
     }
     typealias Result = IPokemonListLoader.Result
+    private let apiService: IPokemonAPIService
+    
+    init(apiService: IPokemonAPIService) {
+        self.apiService = apiService
+    }
     
     func load(_ dataComposer: IPokemonListDataComposer, completion: @escaping (Result) -> Void) {
         let url = dataComposer.getURL()
@@ -33,8 +38,8 @@ final class RemotePokemonListLoader: IPokemonListLoader {
     }
     
     private func requestApi(_ url: String, completion: @escaping (Result) -> Void) {
-        AF.request(url).validate().responseData { response in
-            switch response.result {
+        apiService.request(url: url) { response in
+            switch response {
             case .success(let data):
                 completion(RemotePokemonListLoader.map(data: data))
             case .failure(let errorApi):

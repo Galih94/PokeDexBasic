@@ -6,9 +6,9 @@
 //
 
 enum MainPageComposer {
-    static func compose(onTappedPokemon: ((Pokemon) -> Void)?) -> MainTabViewController {
+    static func compose(apiService: IPokemonAPIService, onTappedPokemon: ((Pokemon) -> Void)?) -> MainTabViewController {
         let profileViewModel = ProfileViewModel(loader: RealmLocalData())
-        let homeViewModel = HomeViewModel(loader: RemotePokemonListLoader(), onTappedPokemon: onTappedPokemon)
+        let homeViewModel = HomeViewModel(loader: RemotePokemonListLoader(apiService: apiService), onTappedPokemon: onTappedPokemon)
         let profile = ProfileViewController(viewModel: profileViewModel)
         let home = HomeViewController(viewModel: homeViewModel)
         let mainTab = MainTabViewController(pages: [home, profile])
