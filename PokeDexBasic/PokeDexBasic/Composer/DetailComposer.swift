@@ -6,8 +6,8 @@
 //
 
 enum DetailComposer {
-    static func compose() -> DetailViewController {
-        let viewModel = DetailViewModel()
+    static func compose(onBackTapped: @escaping () -> Void) -> DetailViewController {
+        let viewModel = DetailViewModel(onBackTapped: onBackTapped)
         let viewController = DetailViewController(viewModel: viewModel)
         
         return viewController

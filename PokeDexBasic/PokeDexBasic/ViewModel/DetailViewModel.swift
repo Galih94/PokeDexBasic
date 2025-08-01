@@ -6,6 +6,13 @@
 //
 
 protocol IDetailViewModel {
+    var onBackTapped: (() -> Void)? { get set }
 }
 
-final class DetailViewModel: IDetailViewModel {}
+final class DetailViewModel: IDetailViewModel {
+    var onBackTapped: (() -> Void)?
+    
+    init(onBackTapped: (() -> Void)?) {
+        self.onBackTapped = onBackTapped
+    }
+}

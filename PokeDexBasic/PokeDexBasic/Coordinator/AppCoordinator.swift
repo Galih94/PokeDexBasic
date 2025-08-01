@@ -17,6 +17,14 @@ final class AppCoordinator {
     func start() {
         goToLogin()
     }
+    
+    func pop() {
+        
+        print("Stack count: \(self.navigationController.viewControllers.count)")
+        print("Current VC: \(self)")
+        print("Stack: \(self.navigationController.viewControllers)")
+        navigationController.popViewController(animated: true)
+    }
 }
 
 // Login
@@ -51,11 +59,13 @@ extension AppCoordinator {
 // Detail
 extension AppCoordinator {
     func composeDetailVC() -> DetailViewController {
-        return DetailComposer.compose()
+        return DetailComposer.compose(onBackTapped: { [weak self]  in
+            self?.pop()
+        })
     }
     
     func goToDetail() {
         let vc = composeDetailVC()
-        navigationController.setViewControllers([vc], animated: false)
+        navigationController.pushViewController(vc, animated: true)
     }
 }

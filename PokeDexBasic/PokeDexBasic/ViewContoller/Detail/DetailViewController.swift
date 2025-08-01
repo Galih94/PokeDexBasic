@@ -8,7 +8,9 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    @IBOutlet weak var abilitiesLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     let viewModel: IDetailViewModel
     
     init(viewModel: IDetailViewModel) {
@@ -22,11 +24,23 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Navigation controller is: \(self.navigationController)")
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        if let nav = self.navigationController {
+            print("Stack count: \(nav.viewControllers.count)")
+            print("Current VC: \(self)")
+            print("Stack: \(nav.viewControllers)")
+        }
 
+        viewModel.onBackTapped?()
+    }
+    
 }
