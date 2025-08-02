@@ -15,8 +15,8 @@ enum MainPageComposer {
         let remoteLoader = RemotePokemonListLoader(apiService: apiService, dataComposer: PokemonListDataComposer(pokemonList: []))
         let localLoader = LocalPokemonListLoader()
         let loader = FallbackPokemonListLoader(remote: remoteLoader, local: localLoader)
-        let homeViewModel = HomeViewModel(detailLoader: detailLoader,
-                                          loader: loader,
+        let homeViewModel = HomeViewModel(detailLoader: MainQueueDispatchDecorator(decoratee: detailLoader),
+                                          loader: MainQueueDispatchDecorator(decoratee: loader),
                                           onTappedPokemon: onTappedPokemon,
                                           onShowPokemonDetail: onShowPokemonDetail
         )

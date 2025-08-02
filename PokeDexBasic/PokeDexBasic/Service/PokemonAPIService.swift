@@ -20,11 +20,12 @@ class PokemonAPIService: IPokemonAPIService {
     }
     
     func request(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        print("hit api: \(url)")
         session.request(url)
-            .validate()
             .responseData { response in
                 switch response.result {
                 case let .success(data):
+                    print("hit api: \(url) response: \(data)")
                     completion(.success(data))
                 case let .failure(error):
                     completion(.failure(error))
@@ -32,4 +33,6 @@ class PokemonAPIService: IPokemonAPIService {
             }
     }
 }
+
+
 

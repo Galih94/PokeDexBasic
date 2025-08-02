@@ -8,11 +8,7 @@
 import Alamofire
 import Foundation
 
-protocol IPokemonDetailLoader {
-    typealias Result = Swift.Result<PokemonDetail, Error>
-    
-    func load(name: String, completion: @escaping (Result) -> Void)
-}
+
 
 final class RemotePokemonDetailLoader: IPokemonDetailLoader {
     private let BASE_URL: String = "https://pokeapi.co/api/v2/pokemon"

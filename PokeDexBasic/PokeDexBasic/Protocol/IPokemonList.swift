@@ -17,3 +17,12 @@ protocol IPokemonListLoader {
     func load(completion: @escaping (Result) -> Void)
 }
 
+extension MainQueueDispatchDecorator: IPokemonListLoader where T == IPokemonListLoader {
+    func load(completion: @escaping (IPokemonListLoader.Result) -> Void) {
+        decoratee.load { [weak self] result in
+            self?.dispatch {
+                completion(result)
+            }
+        }
+    }
+}

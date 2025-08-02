@@ -11,7 +11,10 @@ enum DetailComposer {
                         apiService: IPokemonAPIService,
                         onBackTapped: @escaping () -> Void) -> DetailViewController {
         let loader = RemotePokemonDetailLoader(apiService: apiService)
-        let viewModel = DetailViewModel(loader: loader, pokemonName: pokemonName, onBackTapped: onBackTapped, defaultPokemonDetail: defaultPokemonDetail)
+        let viewModel = DetailViewModel(loader: MainQueueDispatchDecorator(decoratee: loader),
+                                        pokemonName: pokemonName,
+                                        onBackTapped: onBackTapped,
+                                        defaultPokemonDetail: defaultPokemonDetail)
         let viewController = DetailViewController(viewModel: viewModel)
         
         return viewController
