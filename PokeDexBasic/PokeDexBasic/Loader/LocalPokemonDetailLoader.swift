@@ -24,7 +24,7 @@ final class LocalPokemonDetailLoader: IPokemonDetailLoader {
             let realm = try Realm()
             let results = realm.objects(RealmPokemonDetail.self)
             let pokemonDetails: [PokemonDetail] = results.map { $0.mapToPokemonDetail() }
-            if let pokemonDetail = pokemonDetails.first(where: { $0.name == name }) {
+            if let pokemonDetail = pokemonDetails.first(where: { $0.name.lowercased() == name.lowercased() }) {
                 completion(.success(pokemonDetail))
             } else {
                 completion(.failure(RemotePokemonDetailLoader.Error.notFoundPokemon))
