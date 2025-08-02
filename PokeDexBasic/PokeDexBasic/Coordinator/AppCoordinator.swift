@@ -43,7 +43,9 @@ extension AppCoordinator {
 extension AppCoordinator {
     func composeMainTabVC() -> MainTabViewController {
         return MainPageComposer.compose(apiService: apiService, onTappedPokemon: { [weak self] pokemon in
-            self?.goToDetail(pokemon: pokemon)
+            self?.goToDetail(pokemonName: pokemon.name, defaultPokemonDetail: nil)
+        }, onShowPokemonDetail: { [weak self] pokemonDetail in
+            self?.goToDetail(pokemonName: pokemonDetail.name, defaultPokemonDetail: pokemonDetail)
         })
     }
     
@@ -55,14 +57,17 @@ extension AppCoordinator {
 
 // Detail
 extension AppCoordinator {
-    func composeDetailVC(pokemon: Pokemon) -> DetailViewController {
-        return DetailComposer.compose(pokemon: pokemon, apiService: apiService, onBackTapped: { [weak self]  in
+    func composeDetailVC(pokemonName: String, defaultPokemonDetail: PokemonDetail?) -> DetailViewController {
+        return DetailComposer.compose(pokemonName: pokemonName,
+                                      defaultPokemonDetail: defaultPokemonDetail,
+                                      apiService: apiService,
+                                      onBackTapped: { [weak self]  in
             self?.pop()
         })
     }
     
-    func goToDetail(pokemon: Pokemon) {
-        let vc = composeDetailVC(pokemon: pokemon)
+    func goToDetail(pokemonName: String, defaultPokemonDetail: PokemonDetail?) {
+        let vc = composeDetailVC(pokemonName: pokemonName, defaultPokemonDetail: defaultPokemonDetail)
         navigationController.pushViewController(vc, animated: true)
     }
 }

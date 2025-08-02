@@ -12,8 +12,11 @@ import XLPagerTabStrip
 
 final class HomeViewController: UIViewController {
     
+    @IBOutlet weak var searchContainerView: UIView!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    let viewModel: IHomeViewModel
+    var viewModel: IHomeViewModel
     private let disposeBag = DisposeBag()
     
     init(viewModel: IHomeViewModel) {
@@ -28,7 +31,9 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupSearch()
         bindTableView()
+        bindError()
         viewModel.loadPage()
     }
     
@@ -38,6 +43,17 @@ final class HomeViewController: UIViewController {
         tableView.delegate = self
     }
     
+    private func setupSearch() {
+        searchContainerView.layer.cornerRadius = 8
+        
+        searchTextField.enablesReturnKeyAutomatically = true
+        searchTextField.delegate = self
+        
+        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        searchButton.tintColor = .white
+        searchButton.layer.cornerRadius = 8
+    }
+    
     private func bindTableView() {
         viewModel.pokemons
             .asDriver()
@@ -45,6 +61,41 @@ final class HomeViewController: UIViewController {
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func bindError() {
+        viewModel.onSearchError = { [weak self] in
+            guard let self else { return }
+            self.showErrorAlert(message: "POkemon Not Found", on: self)
+        }
+    }
+    
+    @IBAction func searchButtonTapped(_ sender: Any) {
+        searchTextField.resignFirstResponder()
+        guard let query = searchTextField.text, !query.isEmpty else { return }
+        viewModel.searchPokemon(query)
+    }
+    
+    func showErrorAlert(message: String, on viewController: UIViewController) {
+        let alert = UIAlertController(
+            title: "Error",
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        viewController.present(alert, animated: true)
+    }
+
+}
+
+extension HomeViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let query = textField.text, !query.isEmpty else { return false }
+
+        searchTextField.resignFirstResponder()
+        viewModel.searchPokemon(query)
+
+        return true
     }
 }
 

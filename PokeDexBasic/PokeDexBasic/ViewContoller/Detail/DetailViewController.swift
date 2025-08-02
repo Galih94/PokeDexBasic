@@ -41,6 +41,8 @@ class DetailViewController: UIViewController {
     
     private func bindView() {
         viewModel.pokemonDetail
+            .compactMap { $0 }
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] value in
                 self?.nameLabel.text = value.name
                 self?.abilitiesLabel.text = value.abilities.joined(separator: ", ")

@@ -9,7 +9,7 @@ import RxSwift
 
 protocol IDetailViewModel {
     var onBackTapped: (() -> Void)? { get set }
-    var pokemonDetail:  PublishSubject<PokemonDetail> { get }
+    var pokemonDetail: BehaviorSubject<PokemonDetail?> { get }
     
     func loadDetails()
 }
@@ -18,26 +18,34 @@ final class DetailViewModel: IDetailViewModel {
     
     var onBackTapped: (() -> Void)?
     let loader: IPokemonDetailLoader
-    let pokemon: Pokemon
+    let pokemonName: String
     var name: String = ""
     var abilities: [String] = []
-    var pokemonDetail = PublishSubject<PokemonDetail>()
-    
-    
-    init(loader: IPokemonDetailLoader, pokemon: Pokemon, onBackTapped: (() -> Void)?) {
+    var pokemonDetail: BehaviorSubject<PokemonDetail?>
+
+    init(
+        loader: IPokemonDetailLoader,
+        pokemonName: String,
+        onBackTapped: (() -> Void)?,
+        defaultPokemonDetail: PokemonDetail?
+    ) {
         self.loader = loader
-        self.pokemon = pokemon
+        self.pokemonName = pokemonName
         self.onBackTapped = onBackTapped
+        self.pokemonDetail = BehaviorSubject<PokemonDetail?>(value: defaultPokemonDetail)
     }
-    
+
     func loadDetails() {
-        loader.load(name: pokemon.name, completion: { [weak self] result in
+        guard (try? pokemonDetail.value()) == nil else {
+            return
+        }
+        loader.load(name: pokemonName) { [weak self] result in
             switch result {
             case .success(let detail):
                 self?.pokemonDetail.onNext(detail)
-            case .failure(let error):
-                print("Error: \(error)")
+            case .failure( _):
+                break  
             }
-        })
+        }
     }
 }

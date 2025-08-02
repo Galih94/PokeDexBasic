@@ -6,9 +6,12 @@
 //
 
 enum DetailComposer {
-    static func compose(pokemon: Pokemon, apiService: IPokemonAPIService, onBackTapped: @escaping () -> Void) -> DetailViewController {
-        let loader = RemotePokemonDetailLoader(url: "https://pokeapi.co/api/v2/pokemon", apiService: apiService)
-        let viewModel = DetailViewModel(loader: loader, pokemon: pokemon, onBackTapped: onBackTapped)
+    static func compose(pokemonName: String,
+                        defaultPokemonDetail: PokemonDetail?,
+                        apiService: IPokemonAPIService,
+                        onBackTapped: @escaping () -> Void) -> DetailViewController {
+        let loader = RemotePokemonDetailLoader(apiService: apiService)
+        let viewModel = DetailViewModel(loader: loader, pokemonName: pokemonName, onBackTapped: onBackTapped, defaultPokemonDetail: defaultPokemonDetail)
         let viewController = DetailViewController(viewModel: viewModel)
         
         return viewController

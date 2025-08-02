@@ -7,7 +7,6 @@
 
 @testable import PokeDexBasic
 
-
 enum LocalUserRequests: Equatable  {
     case save(User), load, delete
     static func == (lhs: LocalUserRequests, rhs: LocalUserRequests) -> Bool {

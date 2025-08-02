@@ -9,27 +9,35 @@ import RxSwift
 import RxRelay
 
 protocol IHomeViewModel {
+    var onSearchError: (() -> Void)? { get set }
     var pokemons: BehaviorRelay<[Pokemon]> { get }
     var onTappedPokemon: ((Pokemon) -> Void)? { get set }
     func loadPage()
+    func searchPokemon(_ name: String)
 }
 
 final class HomeViewModel: IHomeViewModel {
     var onTappedPokemon: ((Pokemon) -> Void)?
+    var onSearchError: (() -> Void)?
     private(set) var pokemons = BehaviorRelay<[Pokemon]>(value: [])
     private var isLoading = false
     private let loader: IPokemonListLoader
+    private let detailLoader: IPokemonDetailLoader
+    private var onShowPokemonDetail: ((PokemonDetail) -> Void)?
     
-    init(loader: IPokemonListLoader, onTappedPokemon: ((Pokemon) -> Void)?) {
+    init(detailLoader: IPokemonDetailLoader,
+         loader: IPokemonListLoader,
+         onTappedPokemon: ((Pokemon) -> Void)?,
+         onShowPokemonDetail: ((PokemonDetail) -> Void)?) {
         self.loader = loader
         self.onTappedPokemon = onTappedPokemon
+        self.detailLoader = detailLoader
+        self.onShowPokemonDetail = onShowPokemonDetail
     }
     
     func loadPage() {
-        print("res hit load")
         guard !isLoading else { return }
         isLoading = true
-        print("res hit load success")
         let dataComposer = PokemonListDataComposer(pokemonList: pokemons.value)
         loader.load(dataComposer) { [weak self] result in
             switch result {
@@ -37,6 +45,18 @@ final class HomeViewModel: IHomeViewModel {
                 self?.pokemons.accept(success)
             case .failure:
                 break
+            }
+            self?.isLoading = false
+        }
+    }
+    
+    func searchPokemon(_ name: String) {
+        detailLoader.load(name: name) { [weak self] result in
+            switch result {
+            case .success(let pokemonDetail):
+                self?.onShowPokemonDetail?(pokemonDetail)
+            case .failure:
+                self?.onSearchError?()
             }
             self?.isLoading = false
         }

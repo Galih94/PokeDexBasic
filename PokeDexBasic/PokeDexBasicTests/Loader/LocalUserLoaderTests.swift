@@ -25,7 +25,6 @@ final class LocalUserLoaderTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> LocalUserDataSpy {
         let sut = LocalUserDataSpy()
         trackForMemoryLeak(sut, file: file, line: line)

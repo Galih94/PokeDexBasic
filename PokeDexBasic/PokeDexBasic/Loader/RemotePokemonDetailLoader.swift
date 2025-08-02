@@ -15,7 +15,7 @@ protocol IPokemonDetailLoader {
 }
 
 final class RemotePokemonDetailLoader: IPokemonDetailLoader {
-    private let url: String
+    private let BASE_URL: String = "https://pokeapi.co/api/v2/pokemon"
     private let apiService: IPokemonAPIService
     
     enum Error: Swift.Error {
@@ -26,13 +26,12 @@ final class RemotePokemonDetailLoader: IPokemonDetailLoader {
     
     typealias Result = IPokemonDetailLoader.Result
     
-    init (url: String, apiService: IPokemonAPIService) {
-        self.url = url
+    init (apiService: IPokemonAPIService) {
         self.apiService = apiService
     }
     
     func load(name: String, completion: @escaping (Result) -> Void) {
-        apiService.request(url: url + "/\(name)") { response in
+        apiService.request(url: BASE_URL + "/\(name)") { response in
             switch response {
             case .success(let data):
                 completion(RemotePokemonDetailLoader.map(data: data))
