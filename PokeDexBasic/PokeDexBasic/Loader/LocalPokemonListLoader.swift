@@ -8,10 +8,6 @@
 
 import RealmSwift
 
-protocol IPokemonListSaveLocal {
-    func save(_ pokemons: [Pokemon])
-}
-
 final class LocalPokemonListLoader: IPokemonListLoader {
     private let realm: Realm?
     

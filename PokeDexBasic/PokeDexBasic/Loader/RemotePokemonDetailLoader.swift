@@ -18,6 +18,7 @@ final class RemotePokemonDetailLoader: IPokemonDetailLoader {
         case connectivity
         case invalidData
         case notFoundImageURL
+        case notFoundPokemon
     }
     
     typealias Result = IPokemonDetailLoader.Result

@@ -8,9 +8,7 @@
 import Alamofire
 import Foundation
 
-protocol IPokemonAPIService {
-    func request(url: String, completion: @escaping (Result<Data, Error>) -> Void)
-}
+
 
 class PokemonAPIService: IPokemonAPIService {
     private let session: Session

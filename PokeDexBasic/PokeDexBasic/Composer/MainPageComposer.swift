@@ -11,10 +11,15 @@ enum MainPageComposer {
                         onShowPokemonDetail: ((PokemonDetail) -> Void)?
     ) -> MainTabViewController {
         let profileViewModel = ProfileViewModel(loader: RealmLocalData())
-        let detailLoader = RemotePokemonDetailLoader(apiService: apiService)
+        
+        let remoteDetailLoader = RemotePokemonDetailLoader(apiService: apiService)
+        let localDetailLoader = LocalPokemonDetailLoader()
+        let detailLoader = FallbackPokemonDetailLoader(remote: remoteDetailLoader, local: localDetailLoader)
+        
         let remoteLoader = RemotePokemonListLoader(apiService: apiService, dataComposer: PokemonListDataComposer(pokemonList: []))
         let localLoader = LocalPokemonListLoader()
         let loader = FallbackPokemonListLoader(remote: remoteLoader, local: localLoader)
+        
         let homeViewModel = HomeViewModel(detailLoader: MainQueueDispatchDecorator(decoratee: detailLoader),
                                           loader: MainQueueDispatchDecorator(decoratee: loader),
                                           onTappedPokemon: onTappedPokemon,
