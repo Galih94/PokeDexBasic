@@ -10,11 +10,10 @@ import Kingfisher
 import RxSwift
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: BaseViewController {
     @IBOutlet weak var abilitiesLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var spriteImageView: UIImageView!
-    private let disposeBag = DisposeBag()
     
     let viewModel: IDetailViewModel
     
@@ -66,12 +65,4 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func showLoading(_ isShow: Bool) {
-        if isShow {
-            let hud = MBProgressHUD.showAdded(to: view, animated: true)
-            hud.label.text = "Loading..."
-        } else {
-            MBProgressHUD.hide(for: view, animated: true)
-        }
-    }
 }

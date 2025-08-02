@@ -10,14 +10,13 @@ import RxSwift
 import RxCocoa
 import XLPagerTabStrip
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: BaseViewController {
     
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     var viewModel: IHomeViewModel
-    private let disposeBag = DisposeBag()
     
     init(viewModel: IHomeViewModel) {
         self.viewModel = viewModel
@@ -62,12 +61,21 @@ final class HomeViewController: UIViewController {
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.isLoadingDetail
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isLoading in
+                guard let self, let isLoading else { return }
+                self.showLoading(isLoading)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindError() {
         viewModel.onSearchError = { [weak self] in
             guard let self else { return }
-            self.showErrorAlert(message: "POkemon Not Found", on: self)
+            self.showErrorAlert(message: "Pokemon Not Found", on: self)
         }
     }
     

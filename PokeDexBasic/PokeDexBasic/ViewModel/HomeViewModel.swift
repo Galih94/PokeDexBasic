@@ -8,15 +8,10 @@
 import RxSwift
 import RxRelay
 
-protocol IHomeViewModel {
-    var onSearchError: (() -> Void)? { get set }
-    var pokemons: BehaviorRelay<[Pokemon]> { get }
-    var onTappedPokemon: ((Pokemon) -> Void)? { get set }
-    func loadPage()
-    func searchPokemon(_ name: String)
-}
+
 
 final class HomeViewModel: IHomeViewModel {
+    let isLoadingDetail = BehaviorRelay<Bool?>(value: nil)
     var onTappedPokemon: ((Pokemon) -> Void)?
     var onSearchError: (() -> Void)?
     private(set) var pokemons = BehaviorRelay<[Pokemon]>(value: [])
@@ -50,14 +45,15 @@ final class HomeViewModel: IHomeViewModel {
     }
     
     func searchPokemon(_ name: String) {
+        isLoadingDetail.accept(true)
         detailLoader.load(name: name) { [weak self] result in
+            self?.isLoadingDetail.accept(false)
             switch result {
             case .success(let pokemonDetail):
                 self?.onShowPokemonDetail?(pokemonDetail)
             case .failure:
                 self?.onSearchError?()
             }
-            self?.isLoading = false
         }
     }
 }
