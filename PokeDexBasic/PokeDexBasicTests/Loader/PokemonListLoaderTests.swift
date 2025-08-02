@@ -12,50 +12,21 @@ import XCTest
 final class PokemonListLoaderTests: XCTestCase {
     
     func testLoad() {
-        let sut = makeSUT()
-        XCTAssertEqual(sut.requests, [])
         
         let spyDataComposer = PokemonListDataComposerSpy(pokemons: [])
-        sut.load(spyDataComposer, completion: {_ in })
-        XCTAssertEqual(sut.requests, [.load("https://test-url.com")])
+        let sut = makeSUT(dataComposer: spyDataComposer)
+        XCTAssertEqual(sut.requests, [])
+        
+        sut.load(completion: {_ in })
+        XCTAssertEqual(sut.requests, [.load("https://test-url.com", [])])
         XCTAssertEqual(spyDataComposer.getCurrentPokemons(), [])
     }
     
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> PokemonListLoaderSpy {
-        let sut = PokemonListLoaderSpy()
+    private func makeSUT(dataComposer: IPokemonListDataComposer, file: StaticString = #filePath, line: UInt = #line) -> PokemonListLoaderSpy {
+        let sut = PokemonListLoaderSpy(dataComposer: dataComposer)
         trackForMemoryLeak(sut, file: file, line: line)
         
         return sut
     }
-    
-    final class PokemonListDataComposerSpy: IPokemonListDataComposer {
-        
-        private let pokemons: [Pokemon]
-        
-        init(pokemons: [Pokemon]) {
-            self.pokemons = pokemons
-        }
-        
-        func getCurrentPokemons() -> [PokeDexBasic.Pokemon] {
-            return pokemons
-        }
-        
-        func getURL() -> String {
-            return "https://test-url.com"
-        }
-    }
-    
-    enum PokemonListLoaderRequests: Equatable  {
-        case load(String)
-    }
-    
-    final class PokemonListLoaderSpy: IPokemonListLoader {
-        var requests: [PokemonListLoaderRequests] = []
-        
-        func load(_ urlGenerator: IPokemonListDataComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
-            requests.append(.load(urlGenerator.getURL()))
-        }
-    }
-
 }

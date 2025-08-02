@@ -26,23 +26,6 @@ final class PokemonDetailLoaderTests: XCTestCase {
         return sut
     }
     
-    final class PokemonListDataComposerSpy: IPokemonListDataComposer {
-        
-        private let pokemons: [Pokemon]
-        
-        init(pokemons: [Pokemon]) {
-            self.pokemons = pokemons
-        }
-        
-        func getCurrentPokemons() -> [PokeDexBasic.Pokemon] {
-            return pokemons
-        }
-        
-        func getURL() -> String {
-            return "https://test-url.com"
-        }
-    }
-    
     enum PokemonDetailLoaderRequests: Equatable  {
         case load(String)
     }

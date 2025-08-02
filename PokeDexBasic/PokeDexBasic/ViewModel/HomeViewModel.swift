@@ -38,8 +38,7 @@ final class HomeViewModel: IHomeViewModel {
     func loadPage() {
         guard !isLoading else { return }
         isLoading = true
-        let dataComposer = PokemonListDataComposer(pokemonList: pokemons.value)
-        loader.load(dataComposer) { [weak self] result in
+        loader.load { [weak self] result in
             switch result {
             case .success(let success):
                 self?.pokemons.accept(success)

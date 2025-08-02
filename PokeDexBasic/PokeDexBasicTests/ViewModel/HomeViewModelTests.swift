@@ -53,7 +53,8 @@ final class HomeViewModelTests: XCTestCase {
                          file: StaticString = #filePath,
                          line: UInt = #line) -> (HomeViewModel, PokemonListLoaderSpy, PokemonDetailLoaderSpy) {
         let detailLoader = PokemonDetailLoaderSpy()
-        let loader = PokemonListLoaderSpy()
+        let dataComposer = PokemonListDataComposer(pokemonList: [])
+        let loader = PokemonListLoaderSpy(dataComposer: dataComposer)
         let sut = HomeViewModel(detailLoader: detailLoader, loader: loader, onTappedPokemon: onTappedPokemon, onShowPokemonDetail: onShowPokemonDetail)
         trackForMemoryLeak(sut, file: file, line: line)
         trackForMemoryLeak(loader, file: file, line: line)

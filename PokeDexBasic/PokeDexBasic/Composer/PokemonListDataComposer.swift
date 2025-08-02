@@ -7,7 +7,7 @@
 
 final class PokemonListDataComposer: IPokemonListDataComposer {
     private let MAX_POKEMON_PER_FETCH = 10
-    let pokemonList: [Pokemon]
+    var pokemonList: [Pokemon]
     
     init(pokemonList: [Pokemon]) {
         self.pokemonList = pokemonList
@@ -20,6 +20,10 @@ final class PokemonListDataComposer: IPokemonListDataComposer {
     
     func getCurrentPokemons() -> [Pokemon] {
         return pokemonList
+    }
+    
+    func setCurrentPokemons(_ pokemonList: [Pokemon]) {
+        self.pokemonList = pokemonList
     }
 }
 

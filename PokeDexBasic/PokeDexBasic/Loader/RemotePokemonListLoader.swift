@@ -15,17 +15,24 @@ final class RemotePokemonListLoader: IPokemonListLoader {
     }
     typealias Result = IPokemonListLoader.Result
     private let apiService: IPokemonAPIService
+    let dataComposer: IPokemonListDataComposer
     
-    init(apiService: IPokemonAPIService) {
+    init(apiService: IPokemonAPIService, dataComposer: IPokemonListDataComposer) {
         self.apiService = apiService
+        self.dataComposer = dataComposer
     }
     
-    func load(_ dataComposer: IPokemonListDataComposer, completion: @escaping (Result) -> Void) {
+    func load(completion: @escaping (Result) -> Void) {
         let url = dataComposer.getURL()
-        requestApi(url) { response in
+        requestApi(url) { [weak self] response in
+            guard let self else {
+                completion(.failure(Error.connectivity))
+                return
+            }
             switch response {
             case .success(let newPokemon):
-                let allpokemon = dataComposer.getCurrentPokemons() + newPokemon
+                let allpokemon = self.dataComposer.getCurrentPokemons() + newPokemon
+                self.dataComposer.setCurrentPokemons(allpokemon)
                 completion(.success(allpokemon))
             case .failure:
                 completion(.failure(Error.connectivity))

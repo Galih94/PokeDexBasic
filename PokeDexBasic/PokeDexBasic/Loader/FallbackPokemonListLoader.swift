@@ -15,8 +15,8 @@ final class FallbackPokemonListLoader: IPokemonListLoader {
         self.local = local
     }
     
-    func load(_ urlGenerator: IPokemonListDataComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
-        remote.load(urlGenerator) { [weak self] response in
+    func load(completion: @escaping (Result<[Pokemon], Error>) -> Void) {
+        remote.load { [weak self] response in
             switch response {
             case .success( let result):
                 if let objSaveLocal = self?.local as? IPokemonListSaveLocal {
@@ -24,7 +24,7 @@ final class FallbackPokemonListLoader: IPokemonListLoader {
                 }
                 completion(.success(result))
             case .failure( let error):
-                self?.local.load(urlGenerator) { localResult in
+                self?.local.load { localResult in
                     switch localResult {
                     case .success(let localPokemons) where !localPokemons.isEmpty:
                         completion(.success(localPokemons))

@@ -9,10 +9,11 @@
 protocol IPokemonListDataComposer {
     func getURL() -> String
     func getCurrentPokemons() -> [Pokemon]
+    func setCurrentPokemons(_ pokemonList: [Pokemon])
 }
 
 protocol IPokemonListLoader {
     typealias Result = Swift.Result<[Pokemon], Error>
-    func load(_ urlGenerator: IPokemonListDataComposer, completion: @escaping (Result) -> Void)
+    func load(completion: @escaping (Result) -> Void)
 }
 

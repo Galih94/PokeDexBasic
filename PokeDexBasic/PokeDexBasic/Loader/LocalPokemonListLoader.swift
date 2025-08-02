@@ -23,7 +23,7 @@ final class LocalPokemonListLoader: IPokemonListLoader {
         }
     }
     
-    func load(_ urlGenerator: IPokemonListDataComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
+    func load(completion: @escaping (Result<[Pokemon], Error>) -> Void) {
         do {
             let realm = try Realm()
             let results = realm.objects(RealmPokemon.self)

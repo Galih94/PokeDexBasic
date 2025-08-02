@@ -19,9 +19,14 @@ enum PokemonListLoaderRequests: Equatable  {
 
 final class PokemonListLoaderSpy: IPokemonListLoader {
     var requests: [PokemonListLoaderRequests] = []
+    let dataComposer: IPokemonListDataComposer
     
-    func load(_ urlGenerator: IPokemonListDataComposer, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
-        requests.append(.load(urlGenerator.getURL(), urlGenerator.getCurrentPokemons()))
+    init(dataComposer: IPokemonListDataComposer) {
+        self.dataComposer = dataComposer
+    }
+    
+    func load(completion: @escaping (Result<[Pokemon], Error>) -> Void) {
+        requests.append(.load(dataComposer.getURL(), dataComposer.getCurrentPokemons()))
         completion(.success([MockPokemon.obj]))
     }
     
