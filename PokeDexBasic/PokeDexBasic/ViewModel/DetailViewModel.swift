@@ -6,16 +6,18 @@
 //
 
 import RxSwift
+import RxRelay
 
 protocol IDetailViewModel {
     var onBackTapped: (() -> Void)? { get set }
     var pokemonDetail: BehaviorSubject<PokemonDetail?> { get }
+    var isLoading: BehaviorRelay<Bool?> { get }
     
     func loadDetails()
 }
 
 final class DetailViewModel: IDetailViewModel {
-    
+    let isLoading = BehaviorRelay<Bool?>(value: nil)
     var onBackTapped: (() -> Void)?
     let loader: IPokemonDetailLoader
     let pokemonName: String
@@ -39,7 +41,9 @@ final class DetailViewModel: IDetailViewModel {
         guard (try? pokemonDetail.value()) == nil else {
             return
         }
+        isLoading.accept(true)
         loader.load(name: pokemonName) { [weak self] result in
+            self?.isLoading.accept(false)
             switch result {
             case .success(let detail):
                 self?.pokemonDetail.onNext(detail)

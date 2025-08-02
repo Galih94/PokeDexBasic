@@ -5,6 +5,7 @@
 //  Created by Galih Samudra on 31/07/25.
 //
 
+import MBProgressHUD
 import Kingfisher
 import RxSwift
 import UIKit
@@ -54,5 +55,23 @@ class DetailViewController: UIViewController {
                 
             })
             .disposed(by: disposeBag)
+        
+        viewModel.isLoading
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isLoading in
+                guard let self, let isLoading else { return }
+                self.showLoading(isLoading)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func showLoading(_ isShow: Bool) {
+        if isShow {
+            let hud = MBProgressHUD.showAdded(to: view, animated: true)
+            hud.label.text = "Loading..."
+        } else {
+            MBProgressHUD.hide(for: view, animated: true)
+        }
     }
 }
