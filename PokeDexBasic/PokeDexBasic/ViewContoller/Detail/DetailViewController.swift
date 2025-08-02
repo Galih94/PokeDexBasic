@@ -5,12 +5,14 @@
 //  Created by Galih Samudra on 31/07/25.
 //
 
-import UIKit
+import Kingfisher
 import RxSwift
+import UIKit
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var abilitiesLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var spriteImageView: UIImageView!
     private let disposeBag = DisposeBag()
     
     let viewModel: IDetailViewModel
@@ -46,6 +48,10 @@ class DetailViewController: UIViewController {
             .subscribe(onNext: { [weak self] value in
                 self?.nameLabel.text = value.name
                 self?.abilitiesLabel.text = value.abilities.joined(separator: ", ")
+                if let url = URL(string: value.imageURL) {
+                    self?.spriteImageView.kf.setImage(with: url)
+                }
+                
             })
             .disposed(by: disposeBag)
     }
