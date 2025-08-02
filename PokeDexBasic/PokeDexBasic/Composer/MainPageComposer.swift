@@ -12,7 +12,9 @@ enum MainPageComposer {
     ) -> MainTabViewController {
         let profileViewModel = ProfileViewModel(loader: RealmLocalData())
         let detailLoader = RemotePokemonDetailLoader(apiService: apiService)
-        let loader = RemotePokemonListLoader(apiService: apiService)
+        let remoteLoader = RemotePokemonListLoader(apiService: apiService)
+        let localLoader = LocalPokemonListLoader()
+        let loader = FallbackPokemonListLoader(remote: remoteLoader, local: localLoader)
         let homeViewModel = HomeViewModel(detailLoader: detailLoader,
                                           loader: loader,
                                           onTappedPokemon: onTappedPokemon,

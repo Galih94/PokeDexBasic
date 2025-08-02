@@ -39,7 +39,7 @@ final class RemotePokemonListLoader: IPokemonListLoader {
             switch response {
             case .success(let data):
                 completion(RemotePokemonListLoader.map(data: data))
-            case .failure(let errorApi):
+            case .failure( _):
                 completion(.failure(Error.connectivity))
             }
         }
