@@ -39,6 +39,7 @@ final class HomeViewController: UIViewController {
     
     private func setupTableView() {
         tableView.register(UINib(nibName: "PokemonTableViewCell", bundle: nil), forCellReuseIdentifier: "PokemonTableViewCell")
+        tableView.tableFooterView = makeLoadingFooterView()
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -84,6 +85,19 @@ final class HomeViewController: UIViewController {
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         viewController.present(alert, animated: true)
+    }
+
+    func makeLoadingFooterView() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 60))
+        
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.center = footerView.center
+        activityIndicator.color = .white
+        activityIndicator.startAnimating()
+        
+        footerView.addSubview(activityIndicator)
+        
+        return footerView
     }
 
 }
